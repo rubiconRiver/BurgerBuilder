@@ -26,7 +26,8 @@ class BurgerBuilder extends Component {
             meat: 0
         },
         totalPrice: INITIAL_PRICE,
-        purchaseable: false    
+        purchaseable: false,
+        purchasing: false   
     }
 
         // updatePurchaseState = (price) => {     
@@ -36,16 +37,16 @@ class BurgerBuilder extends Component {
         // }
         
         
-        updatePurchaseState (ingredients) {
-            const sum = Object.keys(ingredients)
+    updatePurchaseState(ingredients) {
+        const sum = Object.keys(ingredients)
             .map(igKey => {
                 return ingredients[igKey]
             })
             .reduce((sum, el) => {
                 return sum + el;
             }, 0);
-            this.setState({purchaseable: sum > 0});
-        }
+        this.setState({ purchaseable: sum > 0 });
+    }
 
     addIngredientHandler = (type) => {
         //update ingredient
@@ -87,6 +88,11 @@ class BurgerBuilder extends Component {
         this.updatePurchaseState(updatedIngredients);
     }
 
+    purchaseHandler = () => {
+        console.log("calling purchase Handler");
+        this.setState({purchasing: true});
+    }
+
     render() {
 
         //check if button should be disabled
@@ -98,10 +104,11 @@ class BurgerBuilder extends Component {
         for (let key in disabledInfo) {
             disabledInfo[key] = disabledInfo[key] <= 0
         }
+        
 
         return(
             <Aux>
-                <Modal>
+                <Modal show={this.state.purchasing}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
@@ -111,7 +118,8 @@ class BurgerBuilder extends Component {
                     ingredientRemoved={this.removeIngredientHandler}
                     disabled={disabledInfo}
                     price={this.state.totalPrice}
-                    purchaseable={this.state.purchaseable}/>
+                    purchaseable={this.state.purchaseable}
+                    ordered={this.purchaseHandler}/>
                 
             </Aux>
         );
