@@ -30,11 +30,9 @@ class BurgerBuilder extends Component {
         purchasing: false   
     }
 
-        // updatePurchaseState = (price) => {     
-        //     price = price.toFixed(2);
-        //     this.setState({purchaseable: !(price === INITIAL_PRICE)});
-        //     console.log(this.state.purchaseable);
-        // }
+        updatePurchaseState = (price) => {     
+            this.setState({purchaseable: !(price === INITIAL_PRICE)});
+        }
         
         
     updatePurchaseState(ingredients) {
@@ -63,7 +61,7 @@ class BurgerBuilder extends Component {
         const newPrice = oldPrice + priceAddition;
 
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
-        this.updatePurchaseState(updatedIngredients);
+        this.updatePurchaseState(newPrice);
     }
 
 
@@ -85,7 +83,7 @@ class BurgerBuilder extends Component {
         const newPrice = oldPrice - priceReduction;
 
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
-        this.updatePurchaseState(updatedIngredients);
+        this.updatePurchaseState(newPrice);
     }
 
     purchaseHandler = () => {
