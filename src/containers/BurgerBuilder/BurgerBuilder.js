@@ -34,17 +34,6 @@ class BurgerBuilder extends Component {
             this.setState({purchaseable: !(price === INITIAL_PRICE)});
         }
         
-        
-    updatePurchaseState(ingredients) {
-        const sum = Object.keys(ingredients)
-            .map(igKey => {
-                return ingredients[igKey]
-            })
-            .reduce((sum, el) => {
-                return sum + el;
-            }, 0);
-        this.setState({ purchaseable: sum > 0 });
-    }
 
     addIngredientHandler = (type) => {
         //update ingredient
@@ -87,8 +76,11 @@ class BurgerBuilder extends Component {
     }
 
     purchaseHandler = () => {
-        console.log("calling purchase Handler");
         this.setState({purchasing: true});
+    }
+
+    purchaseCancelHandler = () => {
+        this.setState({purchasing: false});
     }
 
     render() {
@@ -106,7 +98,7 @@ class BurgerBuilder extends Component {
 
         return(
             <Aux>
-                <Modal show={this.state.purchasing}>
+                <Modal show={this.state.purchasing} modalClosed={this.purchaseCancelHandler}>
                     <OrderSummary ingredients={this.state.ingredients}/>
                 </Modal>
                 <Burger ingredients={this.state.ingredients}/>
