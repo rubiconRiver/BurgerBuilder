@@ -7,7 +7,6 @@ import Modal from '../../components/UI/Modal/Modal';
 import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
 
 const INITIAL_PRICE = 4.00;
-
 const INGREDIENT_PRICES = {
     lettuce: 0.5,
     bacon: 0.7,
@@ -96,7 +95,7 @@ class BurgerBuilder extends Component {
 
         //for each item, set disabledInfo to true if the value is <= 0
         for (let key in disabledInfo) {
-            disabledInfo[key] = disabledInfo[key] <= 0
+            disabledInfo[key] = (disabledInfo[key] <= 0);
         }
         
 
