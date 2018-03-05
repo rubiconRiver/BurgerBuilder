@@ -10,6 +10,8 @@ class Modal extends Component {
         return nextProps.show !== this.props.show 
     }
              
+    
+
     render () {
     
     
