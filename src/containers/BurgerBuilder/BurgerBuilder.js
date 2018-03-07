@@ -29,7 +29,8 @@ class BurgerBuilder extends Component {
         purchasing: false   
     }
 
-        updatePurchaseState = (price) => {     
+        updatePurchaseState = (price) => {
+            //Purchasable will be set to false if the current price and inital price match     
             this.setState({purchaseable: !(price === INITIAL_PRICE)});
         }
         
@@ -48,7 +49,9 @@ class BurgerBuilder extends Component {
         const oldPrice = this.state.totalPrice;
         const newPrice = oldPrice + priceAddition;
 
+        //update ingredients and price
         this.setState({ingredients: updatedIngredients, totalPrice: newPrice});
+        //pass the new price to check if purchasable should be updated
         this.updatePurchaseState(newPrice);
     }
 
