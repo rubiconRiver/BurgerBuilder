@@ -41,6 +41,7 @@ class BurgerBuilder extends Component {
 
   updatePurchaseState = price => {
     //Purchasable will be set to false if the current price and inital price match
+    //Is there a better way to do this?  hmmmm...
     this.setState({ purchaseable: !(price === INITIAL_PRICE) });
   };
 
